@@ -17,13 +17,12 @@
         include 'conexion.php';
 
         //Consultando el registro en mi bd
-        $consulta = "Select * from personas where id = ".$id;
+        $consulta = "Select * from ventas where Referencia = ".$id;
 
         //Ejecutar el Query
         $resultado = mysqli_query($conn, $consulta); 
     ?>
-
-    <h1>Mi Primer Proyecto CRUD</h1>    
+  
     <h2>Eliminar Registro de la Base</h2>
     
     <form method="post">
@@ -32,32 +31,57 @@
             while($dato = mysqli_fetch_assoc($resultado)){
             //echo $dato['nombre'], $dato['tel'], $dato['mail'];
             echo '<div class="form-floating mb-3">';
-            echo '<input type="text" class="form-control" id="nombre" placeholder="Escriba su Nombre" disabled name="nombre" value="'.$dato['nombre'].'">';
-            echo '<label for="nombre">Escriba su Nombre</label></div>';
+            echo '<input type="text" class="form-control" disable value="'.$dato['FechaAlta'].'">';
+            echo '<label>Fecha de Alta</label></div>';
             
             echo '<div class="form-floating mb-3">';
-            echo '<input type="tel" class="form-control" id="telefono" placeholder="No de Telefono" disabled name="telefono" value="'.$dato['tel'].'">';
-            echo '<label for="Telefono">No de Telefono</label></div>';
+            echo '<input type="text" class="form-control" disable value="'.$dato['FechaVenta'].'">';
+            echo '<label>Fecha de Venta</label></div>';
+
+            echo '<div class="form-floating mb-3">';
+            echo '<input type="text" class="form-control" disable value="'.$dato['Tipo'].'">';
+            echo '<label>Tipo de Propiedad</label></div>';
             
             echo '<div class="form-floating mb-3">';
-            echo '<input type="email" class="form-control" id="email" placeholder="name@example.com" disabled name="correo" value="'.$dato['mail'].'">';
-            echo '<label for="email">name@example.com</label></div>';
+            echo '<input type="text" class="form-control" disable value="'.$dato['Operacion'].'">';
+            echo '<label>Tipo de Operacion</label></div>';
+
+            echo '<div class="form-floating mb-3">';
+            echo '<input type="text" class="form-control" disable value="'.$dato['Provincia'].'">';
+            echo '<label>Estado</label></div>';
+            
+            echo '<div class="form-floating mb-3">';
+            echo '<input type="text" class="form-control" disable value="'.$dato['Superficie'].'">';
+            echo '<label>Superficie en M2</label></div>';//
+
+            echo '<div class="form-floating mb-3">';
+            echo '<input type="text" class="form-control" disable value="'.$dato['PrecioVenta'].'">';
+            echo '<label>Precio de Venta</label></div>';
+
+            echo '<div class="form-floating mb-3">';
+            echo '<input type="text" class="form-control" disable value="'.$dato['Vendedor'].'">';
+            echo '<label>Vendedor a Cargo</label></div>';
+            
+            echo '<div class="form-floating mb-3">';
+            echo '<input type="text" class="form-control" disable value="'.$dato['Comision'].'">';
+            echo '<label>Comision Otorgada</label></div>';
             }
         ?>
+
         <div>
             <input class="btn btn-primary" type="submit" value="Eliminar" name="boton"/>
         </div>
+
     </form>
 
     <?php
-        if($_POST){
-            $nombre = $_POST['nombre'];
-            $telefono = $_POST['telefono'];
-            $correo = $_POST['correo'];
-            $eliminar = "Delete from personas where id = '$id'";
-            //DELETE FROM `personas` WHERE `personas`.`id` = 120
+        if(isset($_POST['boton'])){
+            $eliminar = "Delete from ventas where Referencia = '$id'";
+
             mysqli_query($conn, $eliminar);
             mysqli_close($conn);
+
+            echo "<script language='javascript'>window.location='index.php'</script>";
         }
     ?>
 </body>

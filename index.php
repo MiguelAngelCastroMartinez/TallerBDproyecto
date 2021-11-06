@@ -155,7 +155,7 @@
     </form>
 
     <?php
-        if($_POST){
+        if(isset($_POST['boton'])){
             $FechaAlta = $_POST['FechaAlta'];
             $FechaVenta = $_POST['FechaVenta'];
             $Tipo = $_POST['Tipo'];
@@ -163,12 +163,15 @@
             $Provincia = $_POST['Provincia'];
             $Superficie = $_POST['Superficie'];
             $PrecioVenta = $_POST['PrecioVenta'];
-            $Tipo = $_POST['Vendedor'];
+            $Vendedor = $_POST['Vendedor'];
             $Comision = $PrecioVenta * 0.05;
 
-            $insertar = "Insert Into personas (FechaAlta, FechaVenta, Tipo, Operacion, Provincia, Superficie, PrecioVenta, Vendedor, Comision) Values ('$FechaAlta', '$FechaVenta', '$Tipo', '$Operacion', '$Provincia', '$Superficie', '$PrecioVenta', '$Vendedor', '$Comision')";
+            $insertar = "Insert Into Ventas (FechaAlta, FechaVenta, Tipo, Operacion, Provincia, Superficie, PrecioVenta, Vendedor, Comision) Values ('$FechaAlta', '$FechaVenta', '$Tipo', '$Operacion', '$Provincia', '$Superficie', '$PrecioVenta', '$Vendedor', '$Comision')";
+            
             mysqli_query($conn, $insertar);
             mysqli_close($conn);
+
+            echo "<script language = 'javascript'> window.location = 'index.php' </script>";
         }
     ?>
 </body>
